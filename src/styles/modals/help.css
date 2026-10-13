@@ -1,0 +1,126 @@
+.help-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--secondary);
+}
+
+.help-modal-overlay .help-modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	border-radius: 1rem;
+	padding: 2rem;
+	background-color: var(--primary);
+	min-height: 80%;
+	min-width: 50%;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.help-modal-overlay .help-modal h2 {
+	font-size: 2rem;
+}
+
+.help-modal-overlay .help-modal p {
+	max-width: 70ch;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.help-modal-overlay .help-modal .tutorial-gif {
+	width: 100%;
+	height: auto;
+}
+
+.help-modal-overlay .help-modal .page-counter {
+	position: absolute;
+	padding-bottom: 2rem;
+	bottom: 0;
+}
+
+.help-modal-overlay .help-modal .page-counter p {
+	padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+@media only screen and (max-width: 1400px) {
+	.help-modal-overlay .help-modal {
+		gap: 0.6rem;
+		scale: 0.8;
+	}
+
+	.help-modal-overlay .help-modal h2 {
+		font-size: 1.4rem;
+	}
+
+	.help-modal-overlay .help-modal p {
+		font-size: 0.8rem;
+	}
+
+	.help-modal-overlay .help-modal a {
+		font-size: 0.8rem;
+	}
+}
+
+.help-modal-overlay .help-modal #help-modal-close-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	font-size: 2rem;
+	width: 36px;
+	height: 36px;
+	top: 10px;
+	right: 10px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.help-modal-overlay .help-modal .buttons {
+	width: 100%;
+	margin-top: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.help-modal-overlay .help-modal .buttons button {
+	border: none;
+	font-weight: bold;
+	background-color: var(--accent);
+	color: var(--primary);
+	padding: 0.5rem 1rem 0.5rem 1rem;
+	border-radius: 0.5rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 1400px) {
+	.help-modal-overlay .help-modal .buttons button {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+	}
+}
+
+.help-modal-overlay .help-modal .buttons button:hover {
+	background-color: var(--accent-hover);
+}
+
+.help-modal-overlay .help-modal .buttons button:active {
+	background-color: var(--accent-active);
+}
+
+.help-modal-overlay .help-modal .buttons .page-buttons {
+	display: flex;
+	gap: 1rem;
+}

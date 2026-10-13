@@ -1,0 +1,17 @@
+#footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	background-color: var(--tertiary);
+	color: var(--primary);
+	font-size: 0.7rem;
+}
+
+@media only screen and (max-width: 1400px) {
+	#footer {
+		font-size: 0.5rem;
+		padding: 0.4rem;
+	}
+}

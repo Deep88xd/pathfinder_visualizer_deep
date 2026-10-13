@@ -1,0 +1,20 @@
+:root {
+	--background: #ffffff;
+	--grid-line-color: rgba(0, 0, 0, 0.2);
+
+	--primary: #ffffff;
+	--secondary: #292929;
+	--accent: #1ccaff;
+	--accent-hover: #0bb5e8;
+	--accent-active: #0aa0ce;
+	--tertiary: #26324c;
+	--tertiary2: rgba(47, 63, 95, 0.8);
+
+	--empty: #fafafa;
+	--closed-node: #09a8ea;
+	--wall-node: #00345b;
+	--path-node: #ffb400;
+	--open-node: #70d6ff;
+	--start-node: #ff54aa;
+	--end-node: #6f5fff;
+}

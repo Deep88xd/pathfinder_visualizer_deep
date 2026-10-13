@@ -1,0 +1,114 @@
+import manhattanDistance from '../manhattanDistance';
+import createPriorityQueue from '../priorityQueue';
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default async function aStar(
+	startNode,
+	endNode,
+	grid,
+	gridNodeRefs,
+	speed
+) {
+	const updateGrid = async (nodeToChange, type) => {
+		if ((nodeToChange.isStart || nodeToChange.isEnd) && type !== 'path') return;
+
+		if (type === 'open') {
+			grid[nodeToChange.y][nodeToChange.x].isOpenSet = true;
+			grid[nodeToChange.y][nodeToChange.x].isClosedSet = false;
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.add('open-set-node');
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.remove(
+				'closed-set-node'
+			);
+		}
+		if (type === 'closed') {
+			grid[nodeToChange.y][nodeToChange.x].isOpenSet = false;
+			grid[nodeToChange.y][nodeToChange.x].isClosedSet = true;
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.add(
+				'closed-set-node'
+			);
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.remove(
+				'open-set-node'
+			);
+		}
+		if (type === 'path') {
+			grid[nodeToChange.y][nodeToChange.x].isOpenSet = false;
+			grid[nodeToChange.y][nodeToChange.x].isClosedSet = false;
+			grid[nodeToChange.y][nodeToChange.x].isPath = true;
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.add('path-node');
+			if (speed !== 0) {
+				gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.add('animated');
+			}
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.remove(
+				'closed-set-node'
+			);
+			gridNodeRefs.current[grid[nodeToChange.y][nodeToChange.x].id].classList.remove(
+				'open-set-node'
+			);
+		}
+	};
+
+	// display final path
+	async function reconstructPath(endNode) {
+		const path = [];
+		let currentNode = endNode;
+		while (currentNode !== null) {
+			path.unshift(currentNode);
+			currentNode = currentNode.previousNode;
+		}
+
+		for (let i = 0; i < path.length; i++) {
+			if (speed !== 0) {
+				await sleep(50);
+			}
+			await updateGrid(path[i], 'path');
+		}
+		return path;
+	}
+
+	const openSet = createPriorityQueue(); // priority queue to efficiently get lowest f score nodes
+	const inOpenSet = new Set(); // used to track if nodes are in the openset or not
+	startNode.gCost = 0;
+	startNode.hCost = manhattanDistance(startNode, endNode);
+	startNode.fCost = startNode.gCost + startNode.hCost;
+	openSet.enqueue(startNode, startNode.fCost);
+	inOpenSet.add(startNode.id);
+
+	while (!openSet.isEmpty()) {
+		if (speed !== 0) {
+			await sleep(speed);
+		}
+
+		// get node in openSet with the lowest fCost
+		let currentNode = openSet.dequeue();
+		inOpenSet.delete(currentNode.id);
+
+		// If we've reached the end, backtrack to find the path
+		if (currentNode.x === endNode.x && currentNode.y === endNode.y) {
+			let path = await reconstructPath(endNode);
+			return true;
+		}
+
+		await updateGrid(currentNode, 'closed');
+
+		for (const neighbor of currentNode.neighbors) {
+			const tentativeGCost = currentNode.gCost + 1; // cost between neighbors
+			if (tentativeGCost < neighbor.gCost || neighbor.gCost === null) {
+				neighbor.previousNode = currentNode;
+				neighbor.gCost = tentativeGCost;
+				neighbor.hCost = manhattanDistance(neighbor, endNode);
+				neighbor.fCost = neighbor.gCost + neighbor.hCost;
+
+				// add neighbor to openset if it's not already in it and if it's not a wall
+				if (!inOpenSet.has(neighbor.id) && !neighbor.isWall) {
+					openSet.enqueue(neighbor, neighbor.fCost);
+					inOpenSet.add(neighbor.id);
+					await updateGrid(neighbor, 'open');
+				}
+			}
+		}
+	}
+
+	// path not found
+	return true;
+}

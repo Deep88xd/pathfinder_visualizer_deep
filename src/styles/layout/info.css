@@ -1,0 +1,89 @@
+#info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	color: var(--secondary);
+	padding: 1rem;
+}
+
+@media only screen and (max-width: 1400px) {
+	#info {
+		gap: 0.8rem;
+		padding: 0.6rem;
+	}
+
+	#info .algorithm-selected {
+		font-size: 0.6rem;
+	}
+}
+
+#info .node-colors-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3rem;
+}
+
+@media only screen and (max-width: 1400px) {
+	#info .node-colors-info {
+		gap: 2rem;
+	}
+}
+
+#info .node-colors-info .node-info-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+@media only screen and (max-width: 1400px) {
+	#info .node-colors-info .node-info-item {
+		font-size: 0.6rem;
+	}
+
+	#info .node-colors-info .node-info-item svg,
+	#info .node-colors-info .node-info-item .info-img {
+		width: 12px;
+		height: 12px;
+	}
+}
+
+#info .node-colors-info .node-info-item > div {
+	height: 20px;
+	width: 20px;
+	border: 1px solid var(--grid-line-color);
+}
+
+@media only screen and (max-width: 1400px) {
+	#info .node-colors-info .node-info-item > div {
+		height: 12px;
+		width: 12px;
+	}
+}
+
+#info .node-colors-info .node-info-item #info-wall {
+	background-color: var(--wall-node);
+}
+
+#info .node-colors-info .node-info-item #info-visited {
+	background-color: var(--closed-node);
+}
+
+#info .node-colors-info .node-info-item #info-unvisited {
+	background-color: var(--empty);
+}
+
+#info .node-colors-info .node-info-item #info-path {
+	background-color: var(--path-node);
+}
+
+#info .node-colors-info .node-info-item #info-start {
+	background-color: var(--start-node);
+}
+
+#info .node-colors-info .node-info-item #info-end {
+	background-color: var(--end-node);
+}

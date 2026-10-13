@@ -1,0 +1,57 @@
+@keyframes popIn {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+#main {
+	flex-grow: 1;
+	width: 100%;
+	display: grid;
+	place-items: center;
+	align-items: start;
+	background-color: var(--background);
+}
+
+#main #grid {
+	display: grid;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+#main #grid .grid-node {
+	outline: 1px solid var(--grid-line-color);
+	background-color: var(--empty);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+#main #grid .path-node {
+	background-color: var(--path-node);
+}
+
+#main #grid .open-set-node {
+	background-color: var(--open-node);
+}
+
+#main #grid .closed-set-node {
+	background-color: var(--closed-node);
+}
+
+#main #grid .wall-node {
+	background-color: var(--wall-node);
+}
+
+#main #grid .animated {
+	animation: popIn 0.2s ease-out;
+}
+
+#main #grid .temp-node {
+	z-index: 100;
+	background-color: orange;
+}

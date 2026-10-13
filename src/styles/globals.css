@@ -1,0 +1,25 @@
+@import './variables.css';
+@import './layout/header.css';
+@import './layout/footer.css';
+@import './layout/main.css';
+@import './layout/info.css';
+@import './modals/help.css';
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	height: 100vh;
+	max-width: 100vw;
+	max-height: 100vh;
+}
+
+body {
+	background-color: var(--primary);
+	display: flex;
+	flex-direction: column;
+}
